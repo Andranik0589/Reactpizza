@@ -1,14 +1,18 @@
 import React from "react";
-import Button from "./Button";
-import Header from "./header";
+import Button from "./components/Button";
+import Header from "./components/header";
 
 function App() {
+  const onclir = () => {
+    alert("dffdss")
+  };
   return (
     <div className="wrapper">
       <Header/>
       <Button outline>apush</Button>
       <Button text="gndik"/>
-      
+      <Button onClick={onclir}>knopka</Button>
+
       <div className="content">
         <div className="container">
           <div className="content__top">
