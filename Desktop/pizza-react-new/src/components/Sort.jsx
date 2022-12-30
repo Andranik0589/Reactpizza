@@ -2,6 +2,17 @@ import React from "react";
 
 
 const Sort = () => {
+    const list = ['популярности', 'цене', 'алфавиту']
+    const [open, setOpen] = React.useState(false)
+    const [acvtiveType, setActiveType] = React.useState(0)
+    const sortName = list[acvtiveType]
+
+    console.log(sortName)
+    const onClickListItem = (i) => {
+
+        setActiveType(i)
+        setOpen(false)
+    }
     return (
         <div className="sort">
             <div className="sort__label">
@@ -18,15 +29,22 @@ const Sort = () => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span>популярности</span>
+                <span onClick={() => setOpen(!open)}>{sortName}</span>
             </div>
-            <div className="sort__popup">
-                <ul>
-                    <li className="active">популярности</li>
-                    <li>цене</li>
-                    <li>алфавиту</li>
-                </ul>
-            </div>
+            {
+                open && (<div className="sort__popup">
+                    <ul>
+                        {
+                            list.map((name, i) => (
+                                <li key={i} onClick={() => onClickListItem(i, name)}
+                                    className={acvtiveType === i ? "active" : ""}
+
+                                >{name}</li>
+                            ))
+                        }
+                    </ul>
+                </div>)
+            }
         </div>
     )
 }
