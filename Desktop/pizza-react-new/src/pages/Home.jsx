@@ -8,19 +8,33 @@ import Categories from '../components/Categories';
 const Home = () => {
     const [item, setItem] = React.useState([]);
     const [isLoading, setIsloading] = React.useState(true);
+    const [categoryId, setCategoryId] = React.useState(0);
+    const [sortType, setSortType] = React.useState({
+        name: 'популярности',
+        sortProperty: 'rating'
+    });
+    console.log(sortType);
     React.useEffect(() => {
-        fetch('https://63afaf17cb0f90e5147818b9.mockapi.io/pizzas')
+        setIsloading(true)
+        fetch(`https://63afaf17cb0f90e5147818b9.mockapi.io/pizzas?${categoryId > 0 ? `category=${categoryId}` : ""}&sortBy=${sortType.sortProperty}&order=desc`)
+
             .then((stream) => stream.json())
             .then((arr) => {
                 setItem(arr);
                 setIsloading(false);
             });
-    }, []);
+        window.scrollTo(0, 0)
+
+    }, [categoryId, sortType]);
+
     return (
         <>
             <div className="content__top">
-                <Categories item={['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']} />
-                <Sort />
+                <Categories
+                    value={categoryId}
+                    onChangeCategory={(id) => setCategoryId(id)}
+                />
+                <Sort value={sortType} onChangeSort={(i) => setSortType(i)} />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
