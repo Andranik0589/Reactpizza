@@ -9,7 +9,7 @@ const Categories = ({ value, onChangeCategory }) => {
         setActiveIndex(index)
     }
  */
-    console.log(value);
+
     return (
         <div className="categories">
             <ul>
