@@ -15,7 +15,7 @@ import { SearchContext } from '../App';
 const Home = () => {
     const navigate = useNavigate()
     const { categoryId, sort, currentPage } = useSelector(state => state.filter)
-    const isSearch = useRef(false)
+    const isSearch = React.useRef(false)
     const isMounted = React.useRef(false)
     const dispatch = useDispatch()
     const onChangeCategory = (id) => {
@@ -70,8 +70,7 @@ const Home = () => {
             const queryString = QueryString.stringify({
                 sortProperty: sort.sortProperty,
                 categoryId,
-                currentPage,
-
+                currentPage
             })
             navigate(`?${queryString}`)
         }
